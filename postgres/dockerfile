@@ -1,0 +1,6 @@
+FROM postgres:12
+ENV POSTGRES_USER=sonar
+ENV POSTGRES_PASSWORD=sonar
+VOLUME /postgresql /var/lib/postgresql
+VOLUME /postgresql_data /var/lib/postgresql/data
+EXPOSE 5432
