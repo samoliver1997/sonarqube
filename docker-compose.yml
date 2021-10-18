@@ -5,6 +5,7 @@ services:
     image: sonarqube:9.0.1-community
     depends_on:
       - db
+      - init
     environment:
       SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
       SONAR_JDBC_USERNAME: sonar
@@ -15,6 +16,13 @@ services:
       - sonarqube_logs:/opt/sonarqube/logs
     ports:
       - "9000:9000"
+  init:
+    image: bash
+    privileged: true
+    user: root
+    volumes:
+      - ./init.sh:/mnt/init.sh
+    command: ["sh", "-e", "/mnt/init.sh"]
   db:
     image: postgres:12
     environment:
@@ -29,4 +37,18 @@ volumes:
   sonarqube_extensions:
   sonarqube_logs:
   postgresql:
+    driver_opts:
+       # Filesystem configuration
+       backup_policy: ENABLED
+       lifecycle_policy: AFTER_14_DAYS
+       performance_mode: maxIO
+       throughput_mode: provisioned
+       provisioned_throughput: 1
   postgresql_data:
+    driver_opts:
+       # Filesystem configuration
+       backup_policy: ENABLED
+       lifecycle_policy: AFTER_14_DAYS
+       performance_mode: maxIO
+       throughput_mode: provisioned
+       provisioned_throughput: 1
