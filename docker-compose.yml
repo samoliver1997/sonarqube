@@ -45,20 +45,5 @@ volumes:
   sonarqube_data:
   sonarqube_extensions:
   sonarqube_logs:
-  script:
   postgresql:
-#    driver_opts:
-#       # Filesystem configuration
-#       backup_policy: ENABLED
-#       lifecycle_policy: AFTER_14_DAYS
-#       performance_mode: maxIO
-#       throughput_mode: provisioned
-#       provisioned_throughput: 1
   postgresql_data:
-#    driver_opts:
-#       # Filesystem configuration
-#       backup_policy: ENABLED
-#       lifecycle_policy: AFTER_14_DAYS
-#       performance_mode: maxIO
-#       throughput_mode: provisioned
-#       provisioned_throughput: 1

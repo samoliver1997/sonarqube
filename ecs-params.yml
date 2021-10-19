@@ -3,8 +3,21 @@ task_definition:
   task_execution_role: ecsTaskExecutionRole
   ecs_network_mode: awsvpc
   task_size:
-    mem_limit: 3.0GB
+    mem_limit: 2.0GB
     cpu_limit: 1024
+  efs_volumes:
+  - name: postgresql
+    filesystem_id: fs-0c4dd721002648546
+#    transit_encryption: ENABLED       
+#    transit_encryption_port: 123  
+#    access_point: fsap-05e69f85384fc21f1
+#    iam: ecsTaskExecutionRole
+  - name: postgresql_data
+    filesystem_id: fs-06f5fe60d745d05ec
+#    transit_encryption: ENABLED       
+#    transit_encryption_port: 321
+#    access_point: fsap-00b7b9086f16c62c6
+#    iam: ecsTaskExecutionRole
 run_params:
   network_configuration:
     awsvpc_configuration:

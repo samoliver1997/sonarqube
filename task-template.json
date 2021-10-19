@@ -1,9 +1,9 @@
 {
   "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::335722167938:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::281557493350:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "dnsSearchDomains": null,
+      "dnsSearchDomains": [],
       "environmentFiles": null,
       "logConfiguration": {
         "logDriver": "awslogs",
@@ -14,99 +14,21 @@
           "awslogs-stream-prefix": "ecs"
         }
       },
-      "entryPoint": null,
-      "portMappings": [
-        {
-          "hostPort": 9000,
-          "protocol": "tcp",
-          "containerPort": 9000
-        }
-      ],
-      "command": null,
-      "linuxParameters": null,
-      "cpu": 0,
-      "environment": [
-        {
-          "name": "SONAR_JDBC_PASSWORD",
-          "value": "sonar"
+      "entryPoint": [],
+      "portMappings": [],
+      "command": [],
+      "linuxParameters": {
+        "capabilities": {
+          "add": null,
+          "drop": null
         },
-        {
-          "name": "SONAR_JDBC_URL",
-          "value": "jdbc:postgresql://db:5432/sonar"
-        },
-        {
-          "name": "SONAR_JDBC_USERNAME",
-          "value": "sonar"
-        }
-      ],
-      "resourceRequirements": null,
-      "ulimits": null,
-      "dnsServers": null,
-      "mountPoints": [
-        {
-          "readOnly": null,
-          "containerPath": "/opt/sonarqube/data",
-          "sourceVolume": "sonarqube_data"
-        },
-        {
-          "readOnly": null,
-          "containerPath": "/opt/sonarqube/extensions",
-          "sourceVolume": "sonarqube_extensions"
-        },
-        {
-          "readOnly": null,
-          "containerPath": "/opt/sonarqube/logs",
-          "sourceVolume": "sonarqube_logs"
-        }
-      ],
-      "workingDirectory": null,
-      "secrets": null,
-      "dockerSecurityOptions": null,
-      "memory": 1024,
-      "memoryReservation": 1024,
-      "volumesFrom": [],
-      "stopTimeout": null,
-      "image": "335722167938.dkr.ecr.us-east-1.amazonaws.com/qrpoint-sonarqube:12fd21a0caca37c2445ce5e08beeb661b422378e",
-      "startTimeout": null,
-      "firelensConfiguration": null,
-      "dependsOn": null,
-      "disableNetworking": null,
-      "interactive": null,
-      "healthCheck": null,
-      "essential": true,
-      "links": [],
-      "hostname": null,
-      "extraHosts": null,
-      "pseudoTerminal": null,
-      "user": null,
-      "readonlyRootFilesystem": false,
-      "dockerLabels": null,
-      "systemControls": null,
-      "privileged": null,
-      "name": "qrpoint-sonarqube"
-    },
-    {
-      "dnsSearchDomains": null,
-      "environmentFiles": null,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": null,
-        "options": {
-          "awslogs-group": "/ecs/qrpoint-sonarqube",
-          "awslogs-region": "us-east-1",
-          "awslogs-stream-prefix": "ecs"
-        }
+        "sharedMemorySize": null,
+        "tmpfs": null,
+        "devices": [],
+        "maxSwap": null,
+        "swappiness": null,
+        "initProcessEnabled": null
       },
-      "entryPoint": null,
-      "portMappings": [
-        {
-          "hostPort": 5432,
-          "protocol": "tcp",
-          "containerPort": 5432
-        }
-      ],
-      "command": null,
-      "linuxParameters": null,
       "cpu": 0,
       "environment": [
         {
@@ -120,16 +42,27 @@
       ],
       "resourceRequirements": null,
       "ulimits": null,
-      "dnsServers": null,
-      "mountPoints": [],
+      "dnsServers": [],
+      "mountPoints": [
+        {
+          "readOnly": false,
+          "containerPath": "/var/lib/postgresql",
+          "sourceVolume": "postgresql"
+        },
+        {
+          "readOnly": false,
+          "containerPath": "/var/lib/postgresql/data",
+          "sourceVolume": "postgresql_data"
+        }
+      ],
       "workingDirectory": null,
       "secrets": null,
-      "dockerSecurityOptions": null,
-      "memory": 1024,
-      "memoryReservation": 1024,
+      "dockerSecurityOptions": [],
+      "memory": null,
+      "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "335722167938.dkr.ecr.us-east-1.amazonaws.com/qrpoint-sonarqube-postgres:e3129668b6c71efabcac6b06791e6a3dde1add3b",
+      "image": "postgres:12",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -139,25 +72,129 @@
       "essential": true,
       "links": [],
       "hostname": null,
-      "extraHosts": null,
-      "pseudoTerminal": null,
+      "extraHosts": [],
+      "pseudoTerminal": false,
       "user": null,
-      "readonlyRootFilesystem": null,
+      "readonlyRootFilesystem": false,
       "dockerLabels": null,
       "systemControls": null,
-      "privileged": null,
-      "name": "qrpoint-sonarqube-postgres"
+      "privileged": false,
+      "name": "db"
+    },
+    {
+      "dnsSearchDomains": [],
+      "environmentFiles": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/qrpoint-sonarqube",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": [],
+      "portMappings": [
+        {
+          "hostPort": 9000,
+          "protocol": "tcp",
+          "containerPort": 9000
+        }
+      ],
+      "command": [],
+      "linuxParameters": {
+        "capabilities": {
+          "add": null,
+          "drop": null
+        },
+        "sharedMemorySize": null,
+        "tmpfs": null,
+        "devices": [],
+        "maxSwap": null,
+        "swappiness": null,
+        "initProcessEnabled": null
+      },
+      "cpu": 0,
+      "environment": [
+        {
+          "name": "SONAR_JDBC_PASSWORD",
+          "value": "sonar"
+        },
+        {
+          "name": "SONAR_JDBC_URL",
+          "value": "jdbc:postgresql://127.0.0.1:5432/sonar"
+        },
+        {
+          "name": "SONAR_JDBC_USERNAME",
+          "value": "sonar"
+        },
+        {
+          "name": "sonar.search.javaAdditionalOpts",
+          "value": "-Dnode.store.allow_mmap=false"
+        }
+      ],
+      "resourceRequirements": null,
+      "ulimits": [
+        {
+          "name": "nofile",
+          "softLimit": 65536,
+          "hardLimit": 65536
+        }
+      ],
+      "dnsServers": [],
+      "mountPoints": [
+        {
+          "readOnly": false,
+          "containerPath": "/opt/sonarqube/data",
+          "sourceVolume": "sonarqube_data"
+        },
+        {
+          "readOnly": false,
+          "containerPath": "/opt/sonarqube/extensions",
+          "sourceVolume": "sonarqube_extensions"
+        },
+        {
+          "readOnly": false,
+          "containerPath": "/opt/sonarqube/logs",
+          "sourceVolume": "sonarqube_logs"
+        }
+      ],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": [],
+      "memory": null,
+      "memoryReservation": null,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "sonarqube:9.0.1-community",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": [],
+      "hostname": null,
+      "extraHosts": [],
+      "pseudoTerminal": false,
+      "user": null,
+      "readonlyRootFilesystem": false,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": false,
+      "name": "sonarqube"
     }
   ],
   "placementConstraints": [],
   "memory": "2048",
-  "taskRoleArn": "arn:aws:iam::335722167938:role/ecsTaskExecutionRole",
+  "taskRoleArn": null,
   "compatibilities": [
     "EC2",
     "FARGATE"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:335722167938:task-definition/qrpoint-sonarqube:10",
-  "family": "qrpoint-sonarqube",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:281557493350:task-definition/test:33",
+  "family": "test",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -175,7 +212,7 @@
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "com.amazonaws.ecs.capability.ecr-auth"
+      "name": "ecs.capability.efsAuth"
     },
     {
       "targetId": null,
@@ -187,19 +224,19 @@
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+      "name": "ecs.capability.efs"
     },
     {
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "com.amazonaws.ecs.capability.task-iam-role"
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
     },
     {
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "ecs.capability.execution-role-ecr-pull"
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.25"
     },
     {
       "targetId": null,
@@ -220,20 +257,11 @@
   ],
   "networkMode": "awsvpc",
   "cpu": "1024",
-  "revision": 10,
+  "revision": 33,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
   "volumes": [
-    {
-      "fsxWindowsFileServerVolumeConfiguration": null,
-      "efsVolumeConfiguration": null,
-      "name": "sonarqube_data",
-      "host": {
-        "sourcePath": null
-      },
-      "dockerVolumeConfiguration": null
-    },
     {
       "fsxWindowsFileServerVolumeConfiguration": null,
       "efsVolumeConfiguration": null,
@@ -247,6 +275,47 @@
       "fsxWindowsFileServerVolumeConfiguration": null,
       "efsVolumeConfiguration": null,
       "name": "sonarqube_logs",
+      "host": {
+        "sourcePath": null
+      },
+      "dockerVolumeConfiguration": null
+    },
+    {
+      "fsxWindowsFileServerVolumeConfiguration": null,
+      "efsVolumeConfiguration": {
+        "transitEncryptionPort": null,
+        "fileSystemId": "fs-0c4dd721002648546",
+        "authorizationConfig": {
+          "iam": null,
+          "accessPointId": null
+        },
+        "transitEncryption": null,
+        "rootDirectory": "/"
+      },
+      "name": "postgresql",
+      "host": null,
+      "dockerVolumeConfiguration": null
+    },
+    {
+      "fsxWindowsFileServerVolumeConfiguration": null,
+      "efsVolumeConfiguration": {
+        "transitEncryptionPort": null,
+        "fileSystemId": "fs-06f5fe60d745d05ec",
+        "authorizationConfig": {
+          "iam": null,
+          "accessPointId": null
+        },
+        "transitEncryption": null,
+        "rootDirectory": "/"
+      },
+      "name": "postgresql_data",
+      "host": null,
+      "dockerVolumeConfiguration": null
+    },
+    {
+      "fsxWindowsFileServerVolumeConfiguration": null,
+      "efsVolumeConfiguration": null,
+      "name": "sonarqube_data",
       "host": {
         "sourcePath": null
       },
